@@ -1,0 +1,52 @@
+
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Homework</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>IS545 Homework</h1>
+    <p id="redBalloon">🎈</p>
+
+<script>
+  let balloon = document.getElementById("redBalloon");
+  let size;
+  function setSize(newSize) {
+    size = newSize;
+    balloon.style.fontSize = size + "px";
+    console.log(size + 'px');
+  }
+  setSize(30);
+  function sizeChange(event) {
+    if (event.key === "+") {
+      if (size >= 60) {
+        console.log('Boom!');
+        balloon.innerHTML = "💥";
+        document.body.removeEventListener("keyup", sizeChange);
+      } else {
+        setSize(size + 15);
+        event.preventDefault();
+      }
+    } else if (event.key === "-") {
+      if (size <= 0) {
+        console.log('Done!');
+        let span = document.createElement('span');
+        span.style.fontSize = "20px";
+        let bDone = document.createTextNode("Done");
+        span.appendChild(bDone);
+        balloon.appendChild(span);
+        document.body.removeEventListener("keyup", sizeChange);
+      } else {
+        setSize(size - 15);
+        event.preventDefault();
+      }
+    }
+  }
+  document.body.addEventListener("keyup", sizeChange);
+</script>
+</body>
+</html>
